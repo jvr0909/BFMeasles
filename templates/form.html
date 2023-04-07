@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Information Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='form.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Health Information Form</h1>
+        <form>
+            <label for="IDNumber">ID Number:</label>
+            <input type="text" id="IDNumber" name="IDNumber" required>
+
+            <label for="NamesOfPatient">Names of Patient:</label>
+            <input type="text" id="NamesOfPatient" name="NamesOfPatient" required>
+
+            <label for="DateOfBirth">Date of Birth:</label>
+            <input type="date" id="DateOfBirth" name="DateOfBirth" required>
+
+            <label for="Age">Age:</label>
+            <input type="number" id="Age" name="Age" required>
+
+            <label for="Sex">Sex:</label>
+            <select id="Sex" name="Sex" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+
+            <label for="Towncity">Town/City:</label>
+            <input type="text" id="Towncity" name="Towncity" required>
+
+            <label for="MeaslesIgm">Measles IgM:</label>
+            <input type="text" id="MeaslesIgm" name="MeaslesIgm" required>
+
+            <label for="RubellaIgm">Rubella IgM:</label>
+            <input type="text" id="RubellaIgm" name="RubellaIgm" required>
+
+            <label for="ReportingDistrict">Reporting District:</label>
+            <input type="text" id="ReportingDistrict" name="ReportingDistrict" required>
+
+            <label for="ReportingHealthfacility">Reporting Health Facility:</label>
+            <input type="text" id="ReportingHealthfacility" name="ReportingHealthfacility" required>
+
+            <label for="DateReceivedNatlevel">Date Received (National Level):</label>
+            <input type="date" id="DateReceivedNatlevel" name="DateReceivedNatlevel" required>
+
+            <label for="DateOfLastvaccination">Date of Last Vaccination:</label>
+            <input type="date" id="DateOfLastvaccination" name="DateOfLastvaccination" required>
+
+            <label for="NumberOfVaccinedoses">Number of Vaccine Doses:</label>
+            <input type="number" id="NumberOfVaccinedoses" name="NumberOfVaccinedoses" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
