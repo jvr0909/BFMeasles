@@ -5,55 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Information Form</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='form.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="container">
         <h1>Health Information Form</h1>
         <form>
-            <label for="IDNumber">ID Number:</label>
-            <input type="text" id="IDNumber" name="IDNumber" required>
-
-            <label for="NamesOfPatient">Names of Patient:</label>
-            <input type="text" id="NamesOfPatient" name="NamesOfPatient" required>
-
-            <label for="DateOfBirth">Date of Birth:</label>
-            <input type="date" id="DateOfBirth" name="DateOfBirth" required>
-
-            <label for="Age">Age:</label>
-            <input type="number" id="Age" name="Age" required>
-
-            <label for="Sex">Sex:</label>
-            <select id="Sex" name="Sex" required>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
+            <label for="CountryCode">Country Code:</label>
+            <select class="form-control" id="CountryCode" name="CountryCode" required>
+                <option value=""></option>
+                <option value="BFA">Burkina Faso (BFA)</option>
             </select>
 
-            <label for="Towncity">Town/City:</label>
-            <input type="text" id="Towncity" name="Towncity" required>
-
-            <label for="MeaslesIgm">Measles IgM:</label>
-            <input type="text" id="MeaslesIgm" name="MeaslesIgm" required>
-
-            <label for="RubellaIgm">Rubella IgM:</label>
-            <input type="text" id="RubellaIgm" name="RubellaIgm" required>
+            <label for="ProvinceOfResidence">Province of Residence:</label>
+            <select id="ProvinceOfResidence" name="ProvinceOfResidence" required>
+                <option value=""></option>
+                <option value="Banfora">Banfora</option>
+                <option value="Bobo">Bobo</option>
+                <option value="Dedougou">Dedougou</option>
+                <option value="Dori">Dori</option>
+                <option value="Fada">Fada</option>
+                <option value="Gaoua">Gaoua</option>
+                <option value="Kaya">Kaya</option>
+                <option value="Koudougou">Koudougou</option>
+                <option value="Manga">Manga</option>
+                <option value="Ouagadougou">Ouagadougou</option>
+                <option value="Ouahigouya">Ouahigouya</option>
+                <option value="Tenkodogo">Tenkodogo</option>
+                <option value="Ziniare">Ziniare</option>
+            </select>
 
             <label for="ReportingDistrict">Reporting District:</label>
-            <input type="text" id="ReportingDistrict" name="ReportingDistrict" required>
-
-            <label for="ReportingHealthfacility">Reporting Health Facility:</label>
-            <input type="text" id="ReportingHealthfacility" name="ReportingHealthfacility" required>
+            <select id="ReportingDistrict" name="ReportingDistrict" required></select>
 
             <label for="DateReceivedNatlevel">Date Received (National Level):</label>
             <input type="date" id="DateReceivedNatlevel" name="DateReceivedNatlevel" required>
 
-            <label for="DateOfLastvaccination">Date of Last Vaccination:</label>
-            <input type="date" id="DateOfLastvaccination" name="DateOfLastvaccination" required>
+            <label for="PatientsName">Patients Name:</label>
+            <input type="text" id="PatientsName" name="PatientsName" required>
 
-            <label for="NumberOfVaccinedoses">Number of Vaccine Doses:</label>
-            <input type="number" id="NumberOfVaccinedoses" name="NumberOfVaccinedoses" required>
+            <label for="DateOfBirth">Date of Birth:</label>
+            <input type="date" id="DateOfBirth" name="DateOfBirth" required>
+
+            <label for="Sex">Sex:</label>
+            <select id="Sex" name="Sex" required>
+                <option value="M">M</option>
+                <option value="F">F</option>
+            </select>
+
+            <label for="Towncity">Town/City:</label>
+            <select id="Towncity" name="Towncity" required></select>
+
+            <label for="ReportingHealthfacility">Reporting Health Facility:</label>
+            <input type="text" id="ReportingHealthfacility" name="ReportingHealthfacility" required>
 
             <button type="submit">Submit</button>
+            <button type="button" id="exportData">Export Data</button>
+            <button type="button" id="importData">Import Data</button>
         </form>
     </div>
+    <script src="{{ url_for('static', filename='form.js') }}"></script>
 </body>
 </html>
