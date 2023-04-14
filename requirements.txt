@@ -1,1 +1,4 @@
 flask
+pymysql
+PyYAML
+sqlalchemy
