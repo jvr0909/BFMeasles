@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Data</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='explore.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    
+    
+    <div class="container">
+        <div class="filters">
+            <form id="filters-form">
+                <div class="language-toggle-container">
+                    <label class="switch">
+                        <input type="checkbox" id="language-toggle">
+                        <span class="slider round"></span>
+                    </label>
+                    <span id="language-label">Switch to French</span>
+                </div>
+                <label for="CountryCode" data-translate="Country Code:">Country Code:</label>
+                <select class="form-control" id="CountryCode" name="country_code">
+                    <option value=""></option>
+                    <option value="BFA">Burkina Faso (BFA)</option>
+                </select>
+                <label for="ProvinceOfResidence" data-translate="Province of Residence:">Province of Residence:</label>
+                <select id="ProvinceOfResidence" name="Province of Residence">
+                    <option value=""></option>
+                </select>
+                <label for="ReportingDistrict" data-translate="Reporting District:">Reporting District:</label>
+                <select id="ReportingDistrict" name="Reporting District">
+                    <option value=""></option>
+                </select>
+                <label for="DateReceivedNatlevel" data-translate="Date Received (National Level):">Date Received (National Level):</label>
+                <input type="date" id="DateReceivedNatlevel" name="Date Received (National Level)">
+                <label for="PatientsName" data-translate="Patients Name:">Patients Name:</label>
+                <input type="text" id="PatientsName" name="Patient Name">
+                <label for="Sex" data-translate="Sex:">Sex:</label>
+                <select id="Sex" name="Sex">
+                    <option value=""></option>
+                    <option value="M">M</option>
+                    <option value="F">F</option>
+                </select>
+                <label for="Towncity" data-translate="Town/City">Town/City:</label>
+                <select id="Towncity" name="Town/Ciity">
+                    <option value=""></option>
+                </select>
+                <label for="ReportingHealthfacility" data-translate="Reporting Health Facility:">Reporting Health Facility:</label>
+                <input type="text" id="ReportingHealthfacility" name="Reporting Health Facility">
+            </form>
+            <button id="export-current-data" type="button" data-translate="Export Current Data">Export Current Data</button>
+            <button id="export-all-data" type="button" data-translate="Export All Data">Export All Data</button>
+        </div>
+        <div class="data-display">
+            <table id="data-table">
+                <thead>
+                    <tr>
+                        <th data-translate="Country">Country</th>
+                        <th data-translate="Province">Province</th>
+                        <th data-translate="Reporting District">Reporting District</th>
+                        <th data-translate="Date Received">Date Received</th>
+                        <th data-translate="Patient Name">Patient Name</th>
+                        <th data-translate="Date of Birth">Date of Birth</th>
+                        <th data-translate="Sex">Sex</th>
+                        <th data-translate="Town/City">Town/City</th>
+                        <th data-translate="Reporting Health Facility">Reporting Health Facility</th>
+                        <th data-translate="MeaslesIGM">MeaslesIGM</th>
+                        <th data-translate="RubellaIGM">RubellaIGM</th>
+                    </tr>
+                </thead>                
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='explore.js') }}"></script>
+</body>
+</html>

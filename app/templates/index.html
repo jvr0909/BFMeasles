@@ -8,11 +8,20 @@
 </head>
 <body>
     <div class="container">
+        <div class="language-selection">
+            <span class="language-label english">English</span>
+            <label class="switch">
+                <input type="checkbox" id="language-toggle">
+                <span class="slider round"></span>
+            </label>
+            <span class="language-label french">French</span>
+        </div>
         <h1>Welcome to the Data Platform</h1>
         <div class="buttons">
             <a href="/input" class="button">Input Data</a>
-            <a href="explore-data.html" class="button">Explore Data</a>
+            <a href="/explore" class="button">Explore Data</a>
         </div>
     </div>
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
 </body>
 </html>

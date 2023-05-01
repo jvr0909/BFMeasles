@@ -3,12 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Health Information Form</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='form.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+    
     <div class="container">
+        <div class="language-toggle-container">
+        <span class="language-label english">English</span>
+        <label class="switch">
+            <input type="checkbox" id="language-toggle">
+            <span class="slider round"></span>
+        </label>
+        <span class="language-label french" style="opacity: 0.5;">Français</span>
+        </div>
         <h1>Health Information Form</h1>
         <form>
             <label for="CountryCode">Country Code:</label>
@@ -61,9 +71,9 @@
             <input type="text" id="ReportingHealthfacility" name="ReportingHealthfacility" required>
 
             <button type="submit">Submit</button>
-            <button type="button" id="exportData">Export Data</button>
             <button type="button" id="importData">Import Data</button>
         </form>
+        <input type="file" id="importFile" accept=".csv" style="display: none;">
     </div>
     <script src="{{ url_for('static', filename='form.js') }}"></script>
 </body>

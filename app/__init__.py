@@ -1,23 +1,37 @@
 from flask import Flask
-import pymysql
-import yaml
+from yaml import load, Loader
+import os
+import sqlalchemy
 
-
-def connect():
+def init_connection_engine():
     #get info from yaml file
-    with open('app.yaml') as f:
-        data = yaml.safe_load(f)
+    if os.environ.get('GAE_ENV') != 'standard':
+        try:
+            variables = load(open("app.yaml"), Loader=Loader)
+        except OSError as e:
+            print("Make sure you have the app.yaml file setup")
+            os.exit()
+            
+    env_variables = variables['env_variables']
+    for var in env_variables:
+        os.environ[var] = env_variables[var]
     
-    host = data['host']
-    user = data['user']
-    database = data['database']
-    password = data['password']
     
-    connection = pymysql.connect(host=host, user=user, db=database, password=password)
+    pool = sqlalchemy.create_engine(
+        sqlalchemy.engine.url.URL(
+            drivername="mysql+pymysql",
+            username=os.environ.get("user"),
+            password=os.environ.get("password"),
+            database=os.environ.get("database"),
+            host = os.environ.get("host"),
+        )
+    )
     
-    return connection
+    print("connected to database!!!")
+    return pool
+
 
 app = Flask(__name__)
-db = connect()
+db = init_connection_engine()
 
 from app import routes
