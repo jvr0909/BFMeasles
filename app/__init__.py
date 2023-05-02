@@ -23,7 +23,9 @@ def init_connection_engine():
             username=os.environ.get("user"),
             password=os.environ.get("password"),
             database=os.environ.get("database"),
-            host = os.environ.get("host"),
+            host = os.environ.get("host")
+            # port=os.environ.get("MYSQL_PORT"),
+            # query=eval(os.environ.get("MYSQL_QUERY"))
         )
     )
     

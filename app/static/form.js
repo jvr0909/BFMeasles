@@ -17,7 +17,12 @@ document.getElementById('language-toggle').addEventListener('change', function (
             towncity: 'Town/City:',
             reportingHealthfacility: 'Reporting Health Facility:',
             submit: 'Submit',
-            importData: 'Import Data'
+            importData: 'Import Data',
+            MeaslesIgm: 'Measles IgM',
+            RubellaIgm: 'Rubella IgM',
+            DateOfLastVaccination: 'Date of Last Vaccination',
+            NumberOfVaccineDoses: 'Number of Vaccine Doses',
+
         },
         fr: {
             title: 'Formulaire d\'informations de santé',
@@ -31,7 +36,11 @@ document.getElementById('language-toggle').addEventListener('change', function (
             towncity: 'Ville:',
             reportingHealthfacility: 'Établissement de santé déclarant:',
             submit: 'Soumettre',
-            importData: 'Importer des données'
+            importData: 'Importer des données',
+            measlesIgm: 'Rougeole IgM:',
+            rubellaIgm: 'Rubéole IgM:',
+            dateOfLastVaccination: 'Date de la dernière vaccination:',
+            numberOfVaccineDoses: 'Nombre de doses de vaccin:'
         }
     };
 
@@ -52,6 +61,11 @@ document.getElementById('language-toggle').addEventListener('change', function (
         $('label[for="ReportingHealthfacility"]').text(translations.fr.reportingHealthfacility);
         $('button[type="submit"]').text(translations.fr.submit);
         $('#importData').text(translations.fr.importData);
+        $('#MeaslesIgm').text(translations.fr.MeaslesIgm);
+        $('label[for="MeaslesIgm"]').text(translations.fr.measlesIgm);
+        $('label[for="RubellaIgm"]').text(translations.fr.rubellaIgm);
+        $('label[for="DateOfLastVaccination"]').text(translations.fr.dateOfLastVaccination);
+        $('label[for="NumberOfVaccineDoses"]').text(translations.fr.numberOfVaccineDoses);
     } else {
         englishLabel.style.opacity = 1;
         frenchLabel.style.opacity = 0.5;
@@ -69,6 +83,10 @@ document.getElementById('language-toggle').addEventListener('change', function (
         $('label[for="ReportingHealthfacility"]').text(translations.en.reportingHealthfacility);
         $('button[type="submit"]').text(translations.en.submit);
         $('#importData').text(translations.en.importData);
+        $('label[for="MeaslesIgm"]').text(translations.en.measlesIgm);
+        $('label[for="RubellaIgm"]').text(translations.en.rubellaIgm);
+        $('label[for="DateOfLastVaccination"]').text(translations.en.dateOfLastVaccination);
+        $('label[for="NumberOfVaccineDoses"]').text(translations.en.numberOfVaccineDoses);
     }
 });
 
@@ -175,4 +193,33 @@ $(document).ready(function () {
             });
         }
     });
+
+    function clearForm() {
+        $("form").trigger("reset");
+    }
+    // Add the click event listener for the "Submit" button
+    $("#myForm").submit(function (event) {
+        event.preventDefault();
+        // event.stopImmediatePropagation();
+        // Collect form data
+        const formData = new FormData(event.target);
+    
+        // Send the form data to the server using AJAX
+        fetch("/submit_form", {
+            method: "POST",
+            body: formData,
+        })
+            .then((response) => response.json())
+            .then((data) => {
+            // Show a popup with the message
+            alert(data.message);
+            clearForm(); // Call the clearForm() function after successful submission
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+    });
+
+    
+
 });

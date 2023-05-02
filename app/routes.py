@@ -119,4 +119,33 @@ def export_filtered_data():
         mimetype="text/csv",
         headers={"Content-Disposition": "attachment;filename=data.csv"}
     )
+
+
+@app.route("/submit_form", methods=['POST'])
+def submit_form():
+    print("submitting form")
+    country_code = request.form['CountryCode'].upper()
+    province_of_residence = request.form['ProvinceOfResidence'].upper()
+    reporting_district = request.form['ReportingDistrict'].upper()
+    date_received_natlevel = request.form['DateReceivedNatlevel']
+    patients_name = request.form['PatientsName'].upper()
+    date_of_birth = request.form['DateOfBirth']
+    sex = request.form['Sex'].upper()
+    towncity = request.form['Towncity'].upper()
+    measles_igm = request.form['MeaslesIgm']
+    rubella_igm = request.form['RubellaIgm']
+    date_of_last_vaccination = request.form['DateOfLastVaccination']
+    number_of_doses = request.form['NumberOfVaccineDoses']
+    reporting_healthfacility = request.form['ReportingHealthfacility'].upper()
+    
+    message = db_helper.submit_form(country_code, province_of_residence, reporting_district, date_received_natlevel, patients_name, date_of_birth, sex, towncity, measles_igm, rubella_igm, reporting_healthfacility, date_of_last_vaccination, number_of_doses)
+    
+    if message == "Data submitted successfully!":
+        return jsonify({"message": message}), 200
+    else: 
+        return jsonify({"message": "Failed to submit data. Please try again."}), 400
+
+
+
+    
     

@@ -3,26 +3,6 @@ import pandas as pd
 from datetime import datetime
 
 
-"""
-Table structure in database:
-
-`codeFinalClassification`, 
-`codeInoutpatient`, 
-`codeMeaslesIgm`, 
-`codeOutcome`, 
-`codeRubellaIgm`, 
-`codeSex`, 
-`codeSpecimenCondition`, 
-`codeSpecimenSource`, 
-`codeUrbanrural`, 
-`district`, 
-`genericcasebased`, 
-`generic_interests`, 
-`promt_csps`, 
-`temp`
-
-"""
-
 def extract_data():
     #get info from yaml file
     conn = db.connect()    
@@ -106,3 +86,99 @@ def filter_data(country_code, province_of_residence, reporting_district, date_re
 
     return filtered_data
 
+
+def get_last_index():
+    conn = db.connect()
+    query = "SELECT MAX(`Index`) FROM generic_interests"
+    df = pd.read_sql(query, conn)
+    conn.close()
+    return df['MAX(`Index`)'][0]
+
+def generate_id(country_code, province_of_residence, reporting_district, date_received_natlevel, last_index):
+    #generate id
+    country_code = country_code.upper()
+    province_of_residence = province_of_residence.upper()
+    reporting_district = reporting_district.upper()
+    # get last 2 digits of year
+    print(date_received_natlevel)
+    year = date_received_natlevel.split('-')[0]
+
+    last_two_digits = year[-2:]
+    print("last two digits: " + last_two_digits)
+    last_index = last_index + 1
+    
+    #get first 3 letters of province_of_residence
+    province_of_residence = province_of_residence[:3]
+    
+    #get first 3 letters of reporting_district
+    reporting_district = reporting_district[:3]
+    
+    #CountryCode-ProvinceOfResidence-ReportingDistrict-Year-Index
+    id = country_code + "-" + province_of_residence + "-" + reporting_district + "-" + last_two_digits + "-" + str(last_index)
+    
+    return id
+    
+
+
+def calculate_age(date_of_birth):
+    # Convert the date string to a datetime.date object
+    date_of_birth = datetime.strptime(date_of_birth, "%Y-%m-%d").date()
+    
+    today = datetime.today()
+    age = today.year - date_of_birth.year - ((today.month, today.day) < (date_of_birth.month, date_of_birth.day))
+
+    return age
+    
+    
+    
+    
+    
+def submit_form(country_code, province_of_residence, reporting_district, date_received_natlevel, patients_name, date_of_birth, sex, towncity, measles_igm, rubella_igm, reporting_healthfacility, date_of_last_vaccination, number_of_doses):
+    last_index = get_last_index()
+    print(last_index)
+    id = generate_id(country_code, province_of_residence, reporting_district, date_received_natlevel, last_index)
+        
+    
+    #calculate age
+    age = calculate_age(date_of_birth)
+    
+    date_received_natlevel = datetime.strptime(date_received_natlevel, "%Y-%m-%d").strftime('%m/%d/%y %H:%M:%S')
+    
+    date_of_last_vaccination = datetime.strptime(date_of_last_vaccination, "%Y-%m-%d").strftime('%m/%d/%y %H:%M:%S')
+    
+    date_of_birth = datetime.strptime(date_of_birth, "%Y-%m-%d").strftime('%m/%d/%y %H:%M:%S')
+    
+    insertions = {
+        "Index": last_index + 1,
+        "IDNumber": id,
+        "CountryCode": country_code,
+        "ProvinceOfResidence": province_of_residence,
+        "ReportingDistrict": reporting_district,
+        "DateReceivedNatlevel": date_received_natlevel,
+        "NamesOfPatient": patients_name,
+        "DateOfBirth": date_of_birth,
+        "Age": age,
+        "Sex": sex,
+        "Towncity": towncity,
+        "MeaslesIgm": measles_igm,
+        "RubellaIgm": rubella_igm,
+        "ReportingHealthfacility": reporting_healthfacility,
+        "DateOfLastVaccination": date_of_last_vaccination,
+        "NumberOfVaccineDoses": number_of_doses
+    }
+    
+    #convert to dataframe
+    df = pd.DataFrame(insertions, index=[0])
+    
+    #connect to database
+    conn = db.connect()
+    
+    #insert into database
+    df.to_sql('generic_interests', conn, if_exists='append', index=False)
+    
+    
+    #close the connection
+    conn.close()
+    
+    return "Data submitted successfully!"    
+    
