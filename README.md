@@ -95,11 +95,11 @@ To gain access to the repository, please contact the Dr. Ian Brooks at his email
 This project was developed by the following people:
 
 * [Jai Rajpal](https://github.com/jvr0909)
-* [Aisaiah Pellecer](email:aisaiah2@illinois.edu)
-* [Donlapun Wongkarnta](email:dw16@illinois.edu)
+* [Aisaiah Pellecer](mailto:aisaiah2@illinois.edu)
+* [Donlapun Wongkarnta](mailto:dw16@illinois.edu)
 
 This project was developed under the supervision of:
 
 
-* [Dr. Ian Brooks](email:ianb@illinois.edu)
-* [Dr. Thierry Guigma](email:tguigma@illinois.edu)
+* [Dr. Ian Brooks](mailto:ianb@illinois.edu)
+* [Dr. Thierry Guigma](mailto:tguigma@illinois.edu)
