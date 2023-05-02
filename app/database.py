@@ -10,7 +10,7 @@ def extract_data():
 
     #run query
     df = pd.read_sql(query, conn)
-    print("query executed")
+    # print("query executed")
     
     conn.close()
     return df
@@ -100,11 +100,11 @@ def generate_id(country_code, province_of_residence, reporting_district, date_re
     province_of_residence = province_of_residence.upper()
     reporting_district = reporting_district.upper()
     # get last 2 digits of year
-    print(date_received_natlevel)
+    # print(date_received_natlevel)
     year = date_received_natlevel.split('-')[0]
 
     last_two_digits = year[-2:]
-    print("last two digits: " + last_two_digits)
+    # print("last two digits: " + last_two_digits)
     last_index = last_index + 1
     
     #get first 3 letters of province_of_residence
@@ -135,7 +135,7 @@ def calculate_age(date_of_birth):
     
 def submit_form(country_code, province_of_residence, reporting_district, date_received_natlevel, patients_name, date_of_birth, sex, towncity, measles_igm, rubella_igm, reporting_healthfacility, date_of_last_vaccination, number_of_doses):
     last_index = get_last_index()
-    print(last_index)
+    # print(last_index)
     id = generate_id(country_code, province_of_residence, reporting_district, date_received_natlevel, last_index)
         
     

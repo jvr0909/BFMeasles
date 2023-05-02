@@ -17,7 +17,7 @@ def input():
 @app.route('/export-data')
 def export_data():
     
-    print("exporting data")
+    # print("exporting data")
     # Replace with your database export logic
     df = db_helper.extract_data()    
     output = io.StringIO()
@@ -32,13 +32,13 @@ def export_data():
 
 @app.route('/import-data', methods=['GET', 'POST'])
 def import_data():
-    print("importing data")
+    # print("importing data")
     file = request.files['file']
-    print(file)
+    # print(file)
     if file:
         inputed_data = pd.read_csv(file)
         
-        print("data read")
+        # print("data read")
         
         current_data = db_helper.extract_data()
         
@@ -48,7 +48,7 @@ def import_data():
         #only keep the columns that are in the database
         inputed_data = inputed_data[current_data.columns]
         
-        print("data checked")
+        # print("data checked")
 
         #drop all the rows from inputed_data that are already in the database
         inputed_data = inputed_data[~inputed_data['IDNumber'].isin(current_data['IDNumber'])]
@@ -58,7 +58,7 @@ def import_data():
         
         #append the new data to the database
         db_helper.input_data(inputed_data)
-        print("data imported")
+        # print("data imported")
         return "Data imported successfully", 200
     else:
         return "No file provided", 400
@@ -123,7 +123,7 @@ def export_filtered_data():
 
 @app.route("/submit_form", methods=['POST'])
 def submit_form():
-    print("submitting form")
+    # print("submitting form")
     country_code = request.form['CountryCode'].upper()
     province_of_residence = request.form['ProvinceOfResidence'].upper()
     reporting_district = request.form['ReportingDistrict'].upper()

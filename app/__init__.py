@@ -9,7 +9,7 @@ def init_connection_engine():
         try:
             variables = load(open("app.yaml"), Loader=Loader)
         except OSError as e:
-            print("Make sure you have the app.yaml file setup")
+            # print("Make sure you have the app.yaml file setup")
             os.exit()
             
     env_variables = variables['env_variables']
@@ -24,12 +24,10 @@ def init_connection_engine():
             password=os.environ.get("password"),
             database=os.environ.get("database"),
             host = os.environ.get("host")
-            # port=os.environ.get("MYSQL_PORT"),
-            # query=eval(os.environ.get("MYSQL_QUERY"))
         )
     )
     
-    print("connected to database!!!")
+    # print("connected to database!!!")
     return pool
 
 

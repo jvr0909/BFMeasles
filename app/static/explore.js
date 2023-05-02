@@ -132,7 +132,7 @@ $(document).ready(function () {
     $('#ProvinceOfResidence').on('change', updateReportingDistrictOptions);
 
     $('#filters-form').on('input', function () {
-        console.log("Input event triggered"); // Add this line
+        // console.log("Input event triggered"); // Add this line
         updateData();
     });
 
@@ -145,7 +145,7 @@ $(document).ready(function () {
             filterData[item.name] = item.value;
         });
     
-        console.log('Filter Data:', filterData);
+        // console.log('Filter Data:', filterData);
     
         $.ajax({
             url: '/get_data',
@@ -153,7 +153,7 @@ $(document).ready(function () {
             data: filterData,
             success: function (response) {
                 const data = response;
-                console.log('Received Data:', data);
+                // console.log('Received Data:', data);
                 const tbody = $('#data-table tbody');
                 tbody.empty();
     
