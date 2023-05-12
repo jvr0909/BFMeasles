@@ -47,15 +47,11 @@ def import_data():
         
         #only keep the columns that are in the database
         inputed_data = inputed_data[current_data.columns]
-        
-        # print("data checked")
-
+    
+    
         #drop all the rows from inputed_data that are already in the database
         inputed_data = inputed_data[~inputed_data['IDNumber'].isin(current_data['IDNumber'])]
-        
-        #make index column for inputed_data equal to the column called Index
-        inputed_data = inputed_data.set_index('Index')
-        
+                
         #append the new data to the database
         db_helper.input_data(inputed_data)
         # print("data imported")

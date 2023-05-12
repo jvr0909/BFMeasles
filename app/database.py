@@ -105,7 +105,15 @@ def generate_id(country_code, province_of_residence, reporting_district, date_re
 
     last_two_digits = year[-2:]
     # print("last two digits: " + last_two_digits)
-    last_index = last_index + 1
+    last_index = last_index + 2
+    
+    #last index should be 4 digits. if it is not, add 0s to the front
+    if len(str(last_index)) == 1:
+        last_index = "000" + str(last_index)
+    if len(str(last_index)) == 2:
+        last_index = "00" + str(last_index)
+    if len(str(last_index)) == 3:
+        last_index = "0" + str(last_index)
     
     #get first 3 letters of province_of_residence
     province_of_residence = province_of_residence[:3]
